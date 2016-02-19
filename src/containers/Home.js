@@ -5,16 +5,14 @@ import { connect } from 'react-redux';
 
 import { getPosts } from '../redux/modules/posts';
 
+import fetchData from '../lib/fetchData';
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true, data: null }
     this.toggle = this.toggle.bind(this);
     this.inc = this.inc.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.dispatch(getPosts())
   }
 
   toggle() {
@@ -85,4 +83,10 @@ function mapState(state) {
   }
 }
 
-export default connect(mapState)(Home);
+const Connected = connect(mapState)(Home);
+
+const Fetched = fetchData(function prepareData(store) {
+  return store.dispatch(getPosts())
+})(Connected);
+
+export default Fetched
