@@ -8,7 +8,7 @@ class Post extends Component {
   render() {
     const post = this.props.post;
     if (! post) return <div>Loading...</div>
-    
+
     return <div>
       <Header
         bgStyle={{backgroundImage: "url('/img/post-bg.jpg')"}}
@@ -33,8 +33,7 @@ class Post extends Component {
 function mapState(state, props) {
   return {
     counter: state.counter,
-    posts: state.posts,
-    post: state.posts.find(post => +post.id === +props.params.id)
+    post: state.entities.posts && state.entities.posts[props.params.id]
   }
 }
 

@@ -79,7 +79,7 @@ class Home extends Component {
 function mapState(state) {
   return {
     counter: state.counter,
-    posts: state.posts
+    posts: state.posts.ids.map(id => state.entities.posts[id])
   }
 }
 

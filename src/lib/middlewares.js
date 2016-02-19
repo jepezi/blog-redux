@@ -1,4 +1,4 @@
-const shouldNormalize = false;
+const shouldNormalize = true;
 import { /*Schema, arrayOf,*/ normalize } from 'normalizr';
 
 // thunk mx

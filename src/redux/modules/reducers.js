@@ -1,3 +1,4 @@
+import merge from 'lodash/merge';
 import posts from './posts';
 
 function greeting(state = [], action) {
@@ -16,10 +17,19 @@ function counter(state = 0, action) {
   return state;
 }
 
+function entities(state = {}, action) {
+  if (action.payload && action.payload.entities) {
+    return merge({}, state, action.payload.entities)
+  }
+
+  return state;
+}
+
 const reducers = (state = {}, action) => {
   return {
     greeting: greeting(state.greeting, action),
     counter: counter(state.counter, action),
+    entities: entities(state.entities, action),
     posts: posts(state.posts, action)
   }
 }
