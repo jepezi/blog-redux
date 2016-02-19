@@ -6,12 +6,28 @@ import Home from './containers/Home';
 import Posts from './containers/Posts';
 import Post from './containers/Post';
 
-const routes = (
-  <Route path='/' component={App}>
-    <IndexRoute component={Home} />
-    <Route path='posts' component={Posts} />
-    <Route path='posts/:id' component={Post} />
-  </Route>
-);
+const PostsRoute = {
+  path: 'posts',
+  component: Posts
+}
+
+const PostRoute = {
+  path: 'posts/:id',
+  component: Post
+}
+
+const NotFoundRoute = {
+  path: '*',
+  component: () => (<div>Oops! Not Found</div>)
+}
+
+const routes = {
+  path: '/',
+  component: App,
+  indexRoute: { component: Home },
+  childRoutes: [
+    PostsRoute, PostRoute, NotFoundRoute
+  ]
+}
 
 export default routes;
