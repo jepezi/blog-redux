@@ -1,28 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+import { getPosts } from '../redux/modules/posts';
+
+import fetchData from '../lib/fetchData';
 
 class Posts extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: true, data: null }
+    this.state = { isOpen: true }
     this.toggle = this.toggle.bind(this);
   }
 
-  componentDidMount() {
-    $.get('http://jsonplaceholder.typicode.com/posts', res => {
-      this.setState({
-        data: res.slice(0, 4)
-      });
-    })
-  }
-
   renderPosts() {
-    if (! this.state.data) {
+    if (! this.props.posts.length) {
       return <div>Loading...</div>
     }
 
-    return this.state.data.map(post => {
+    return this.props.posts.slice(0, 10).map(post => {
       return (
         <div key={post.id}>
           <div className="post-preview">
@@ -31,7 +28,7 @@ class Posts extends Component {
                 {post.title}
               </h2>
               <h3 className="post-subtitle">
-                {post.body}
+                {post.body.split(' ', 20).join(' ') + '...'}
               </h3>
             </Link>
             <p className="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
@@ -72,4 +69,17 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+function mapState(state) {
+  return {
+    counter: state.counter,
+    posts: state.posts.ids.map(id => state.entities.posts[id])
+  }
+}
+
+const Connected = connect(mapState)(Posts);
+
+const Fetched = fetchData(function prepareData(store) {
+  return store.dispatch(getPosts())
+})(Connected);
+
+export default Fetched

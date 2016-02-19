@@ -25,7 +25,7 @@ const postSchema = new Schema('posts');
 
 export function getPosts() {
   return (dispatch, getState) => {
-    const posts = getState().posts;
+    const posts = getState().posts.ids;
     if (posts.length > 1) return;
 
     return dispatch({
