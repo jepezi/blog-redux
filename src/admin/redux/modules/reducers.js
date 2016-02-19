@@ -1,5 +1,6 @@
 import merge from 'lodash/merge';
 import posts from './posts';
+import comments from './comments';
 
 function entities(state = {}, action) {
   if (action.payload && action.payload.entities) {
@@ -32,7 +33,8 @@ const reducers = (state = {}, action) => {
     entities: entities(state.entities, action),
     posts: posts(state.posts, action),
     error: error(state.error, action),
-    user: user(state.user, action)
+    user: user(state.user, action),
+    comments: comments(state.comments, action),
   }
 }
 

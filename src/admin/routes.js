@@ -18,12 +18,39 @@ const PostsRoute = {
   }
 }
 
+const PostRoute = {
+  path: 'posts/:id',
+  getComponent: (location, cb) => {
+    require.ensure([], require => {
+      cb(null, require('./containers/Post'))
+    });
+  }
+}
+
+const PostNewRoute = {
+  path: 'posts/new',
+  getComponent(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('./containers/PostForm'));
+    });
+  }
+}
+
+const CommentsRoute = {
+  path: 'comments',
+  getComponent(location, cb) {
+    require.ensure([], (require) => {
+      cb(null, require('./containers/Comments'));
+    });
+  }
+}
+
 const routes = {
   path: '/',
   component: App,
   indexRoute: { component: Home },
   childRoutes: [
-    PostsRoute, NotFoundRoute
+    PostsRoute, PostNewRoute, PostRoute, CommentsRoute, NotFoundRoute
   ]
 }
 

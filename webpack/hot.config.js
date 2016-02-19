@@ -22,6 +22,8 @@ var cssloaders = [
   { test: /^((?!\.module).)*css$/, loader: 'style!css!postcss!sass?outputStyle=expanded&sourceMap&' + "includePaths[]=" + encodeURIComponent(path.resolve(__dirname, "../src/")) },
 ];
 
+var jsonloader = { test: /\.json$/, loader: 'json-loader' };
+
 // export webpack config object.
 module.exports = {
   entry: {
@@ -41,7 +43,7 @@ module.exports = {
     publicPath: '/dist/' // (2)
   },
   module: {
-    loaders: [jsloader].concat(cssloaders)
+    loaders: [jsloader, jsonloader].concat(cssloaders)
   },
   plugins: [ // (4)
     new webpack.optimize.OccurenceOrderPlugin(),

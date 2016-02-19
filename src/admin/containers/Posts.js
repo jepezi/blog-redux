@@ -17,7 +17,7 @@ class Posts extends Component {
     }
 
     return posts.map((post, i) => {
-      return <div key={i} style={{marginBottom: 20}}>
+      return <div key={post.id} style={{marginBottom: 20}}>
         <Link
           to={`/posts/${post.id}`}
           className={s.title}
