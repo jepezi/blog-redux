@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: true, data: null, counter: 0 }
+    this.state = { isOpen: true, data: null }
     this.toggle = this.toggle.bind(this);
     this.inc = this.inc.bind(this);
   }
@@ -50,9 +51,7 @@ class Home extends Component {
   }
 
   inc() {
-    this.setState({
-      counter: this.state.counter + 1
-    });
+    this.props.dispatch({ type: 'counter' })
   }
 
   render() {
@@ -62,7 +61,7 @@ class Home extends Component {
         <hr className="small" />
         <span className="subheading">A Clean Blog Theme by Start Bootstrap</span>
         <button onClick={this.toggle} className="btn btn-primary">Toggle</button>
-        <button onClick={this.inc} className="btn btn-success">Count {this.state.counter}</button>
+        <button onClick={this.inc} className="btn btn-success">Count {this.props.counter}</button>
       </Header>
 
       {this.state.isOpen && <div className="container">
@@ -81,4 +80,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+function mapState(state) {
+  return {
+    counter: state.counter
+  }
+}
+
+export default connect(mapState)(Home);
