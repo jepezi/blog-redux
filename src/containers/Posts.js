@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header';
-import { Link } from 'react-router';
 
-class Home extends Component {
+class Posts extends Component {
   constructor(props) {
     super(props);
     this.state = { isOpen: true }
@@ -17,10 +16,9 @@ class Home extends Component {
 
   render() {
     return <div>
-      <Header bgStyle={{backgroundImage: "url('/img/home-bg.jpg')"}}>
-        <h1>Clean Blog</h1>
+      <Header bgStyle={{backgroundImage: "url('/img/post-bg.jpg')"}}>
+        <h1>All Posts</h1>
         <hr className="small" />
-        <span className="subheading">A Clean Blog Theme by Start Bootstrap</span>
         <button onClick={this.toggle} className="btn btn-primary">Toggle</button>
       </Header>
 
@@ -28,14 +26,14 @@ class Home extends Component {
         <div className="row">
             <div className="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <div className="post-preview">
-                <Link to="/posts/1">
+                <a href="post.html">
                   <h2 className="post-title">
                     Man must explore, and this is exploration at its greatest
                   </h2>
                   <h3 className="post-subtitle">
                     Problems look mighty small from 150 miles up
                   </h3>
-                </Link>
+                </a>
                 <p className="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
               </div>
               <hr />
@@ -84,4 +82,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Posts;
