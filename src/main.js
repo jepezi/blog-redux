@@ -10,7 +10,6 @@ import configureStore from './redux/configureStore';
 const store = configureStore();
 store.dispatch({ type: 'greeting', payload: {name: 'Jip'} });
 store.dispatch({ type: 'greeting', payload: {name: 'Luna'} });
-console.warn(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>

@@ -35,7 +35,7 @@ class Home extends Component {
                 {post.title}
               </h2>
               <h3 className="post-subtitle">
-                {post.body}
+                {post.body.split(' ', 20).join(' ') + '...'}
               </h3>
             </Link>
             <p className="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>

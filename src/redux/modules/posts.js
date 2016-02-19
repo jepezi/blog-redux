@@ -19,7 +19,7 @@ export function getPosts() {
 
     return dispatch({
       type: 'posts/get',
-      payload: superfetch('http://jsonplaceholder.typicode.com/posts'),
+      payload: superfetch('http://localhost:9001/api/v1/posts'),
     });
   }
 }
