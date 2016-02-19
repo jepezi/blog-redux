@@ -9,12 +9,21 @@ const NotFoundRoute = {
   component: () => <div>Oops! Not Found</div>
 }
 
+const PostsRoute = {
+  path: 'posts',
+  getComponent: (location, cb) => {
+    require.ensure([], require => {
+      cb(null, require('./containers/Posts'))
+    });
+  }
+}
+
 const routes = {
   path: '/',
   component: App,
   indexRoute: { component: Home },
   childRoutes: [
-    NotFoundRoute
+    PostsRoute, NotFoundRoute
   ]
 }
 
