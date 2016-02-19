@@ -1,19 +1,25 @@
 import superfetch from '../../lib/superfetch';
+import handleActions from '../../lib/redux-actions/handleActions';
 
-export default (state = [], action) => {
-  switch (action.type) {
-    case 'posts/get':
-      if (action.sequence.type === 'next') {
-        return [ ...state, ...action.payload ]
-      }
-    default:
-      return state;
+const initialState = []
+
+export default handleActions({
+  'posts/get': {
+    start: state => state,
+    next: (state, action) => {
+      return [ ...state, ...action.payload ]
+    }
   }
-}
+}, initialState)
 
 export function getPosts() {
-  return {
-    type: 'posts/get',
-    payload: superfetch('http://jsonplaceholder.typicode.com/posts'),
-  };
+  return (dispatch, getState) => {
+    const posts = getState().posts;
+    if (posts.length > 1) return;
+
+    return dispatch({
+      type: 'posts/get',
+      payload: superfetch('http://jsonplaceholder.typicode.com/posts'),
+    });
+  }
 }
