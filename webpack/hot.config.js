@@ -17,6 +17,11 @@ var jsloader = {
   }
 }
 
+var cssloaders = [
+  { test: /\.module.s?css$/, loader:  'style!css?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass?outputStyle=expanded&' + "includePaths[]=" + encodeURIComponent(path.resolve(__dirname, "../src/")) },
+  { test: /^((?!\.module).)*css$/, loader: 'style!css!postcss!sass?outputStyle=expanded&sourceMap&' + "includePaths[]=" + encodeURIComponent(path.resolve(__dirname, "../src/")) },
+];
+
 // export webpack config object.
 module.exports = {
   entry: {
@@ -36,11 +41,16 @@ module.exports = {
     publicPath: '/dist/' // (2)
   },
   module: {
-    loaders: [jsloader]
+    loaders: [jsloader].concat(cssloaders)
   },
   plugins: [ // (4)
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
-  ]
+  ],
+  postcss: function(webpack) {
+    return [
+      require('autoprefixer')({ browsers: ['last 2 versions'] }),
+    ]
+  },
 };
