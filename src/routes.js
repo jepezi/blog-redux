@@ -3,22 +3,28 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './containers/App';
 import Home from './containers/Home';
-import Posts from './containers/Posts';
-import Post from './containers/Post';
 
 const PostsRoute = {
   path: 'posts',
-  component: Posts
+  getComponent(location, cb) {
+    require.ensure([], require => {
+      cb(null, require('./containers/Posts'))
+    });
+  }
 }
 
 const PostRoute = {
   path: 'posts/:id',
-  component: Post
+  getComponent(location, cb) {
+    require.ensure([], require => {
+      cb(null, require('./containers/Post'))
+    });
+  }
 }
 
 const NotFoundRoute = {
   path: '*',
-  component: () => (<div>Oops! Not Found</div>)
+  component: () => <div>Oops! Not Found</div>
 }
 
 const routes = {

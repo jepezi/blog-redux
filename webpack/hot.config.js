@@ -8,6 +8,7 @@ var jsloader = {
   loader: 'babel',
   query: {
     presets: ['es2015', 'react'],
+    plugins: ['add-module-exports'],
     env: { // (3)
       development: {
         presets: ['react-hmre']
@@ -25,6 +26,7 @@ module.exports = {
   output: {
     path: path.join(APPPATH, 'public', 'dist'),
     filename: '[name].js',
+    chunkFilename: '[id].chunk.js',
     publicPath: '/dist/' // (2)
   },
   module: {
