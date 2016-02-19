@@ -4,7 +4,11 @@ import Header from './Header';
 class Home extends Component {
   render() {
     return <div>
-      <Header />
+      <Header bgStyle={{backgroundImage: "url('/img/home-bg.jpg')"}}>
+        <h1>Clean Blog</h1>
+        <hr className="small" />
+        <span className="subheading">A Clean Blog Theme by Start Bootstrap</span>
+      </Header>
 
       <div className="container">
         <div className="row">
