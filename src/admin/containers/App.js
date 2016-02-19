@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import Nav from '../components/Nav';
+import Nav from '../components/Nav';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     return <div>
-      {/*<Nav user={this.props.user}/>*/}
+      <Nav user={this.props.user}/>
       <div style={{marginLeft: 220}}>
         {this.state.flash && <div>{this.state.flash}</div>}
         {this.props.children}
