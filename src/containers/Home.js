@@ -5,8 +5,9 @@ import { Link } from 'react-router';
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: true, data: null }
+    this.state = { isOpen: true, data: null, counter: 0 }
     this.toggle = this.toggle.bind(this);
+    this.inc = this.inc.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,12 @@ class Home extends Component {
     })
   }
 
+  inc() {
+    this.setState({
+      counter: this.state.counter + 1
+    });
+  }
+
   render() {
     return <div>
       <Header bgStyle={{backgroundImage: "url('/img/home-bg.jpg')"}}>
@@ -55,6 +62,7 @@ class Home extends Component {
         <hr className="small" />
         <span className="subheading">A Clean Blog Theme by Start Bootstrap</span>
         <button onClick={this.toggle} className="btn btn-primary">Toggle</button>
+        <button onClick={this.inc} className="btn btn-success">Count {this.state.counter}</button>
       </Header>
 
       {this.state.isOpen && <div className="container">
