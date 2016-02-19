@@ -6,7 +6,8 @@ import createLogger from 'redux-logger';
 
 export default function configureStore(initialState) {
   const store = createStore(reducers, initialState, compose(
-    applyMiddleware(thunk, promise, createLogger())
+    applyMiddleware(thunk, promise, createLogger()),
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   ));
 
   // Hot reload reducers
