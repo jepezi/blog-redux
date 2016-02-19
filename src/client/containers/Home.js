@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getPosts } from '../redux/modules/posts';
 
-import fetchData from '../lib/fetchData';
+import fetchData from '../../lib/fetchData';
 
 class Home extends Component {
   constructor(props) {

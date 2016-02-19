@@ -1,5 +1,5 @@
-import superfetch from '../../lib/superfetch';
-import handleActions from '../../lib/redux-actions/handleActions';
+import superfetch from '../../../lib/superfetch';
+import handleActions from '../../../lib/redux-actions/handleActions';
 import { Schema, arrayOf } from 'normalizr';
 
 const initialState = {

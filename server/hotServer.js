@@ -1,5 +1,15 @@
+require('babel-polyfill');
+require('babel-register')({
+  presets: ['es2015', 'react', 'stage-2'],
+  plugins: ['add-module-exports'],
+});
+
 const path = require('path');
 const express = require('express');
+// Login
+const bodyParser = require('body-parser');
+const session = require('express-session');
+//
 const webpack = require('webpack');
 const devPort = 3001;
 
@@ -17,10 +27,21 @@ const serverOptions = {
 
 const app = express();
 
+// Login
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: 'shuuuuu',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000*60 }
+}));
+
 app.use(require('webpack-dev-middleware')(compiler, serverOptions));
 app.use(require('webpack-hot-middleware')(compiler));
 app.use(express.static('public'));
 
+app.use('/admin', require('./admin.js'));
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });

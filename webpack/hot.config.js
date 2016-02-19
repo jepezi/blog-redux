@@ -19,10 +19,16 @@ var jsloader = {
 
 // export webpack config object.
 module.exports = {
-  entry: [ // (1)
-    'webpack-hot-middleware/client',
-    path.join(APPPATH, 'src/main.js')
-  ],
+  entry: {
+    main: [ // (1)
+      'webpack-hot-middleware/client',
+      path.join(APPPATH, 'src/client/main.js')
+    ],
+    admin: [
+      'webpack-hot-middleware/client',
+      path.join(APPPATH, 'src/admin/main.js')
+    ]
+  },
   output: {
     path: path.join(APPPATH, 'public', 'dist'),
     filename: '[name].js',

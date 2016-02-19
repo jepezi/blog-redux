@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 
 import reducers from './modules/reducers';
-import { thunk, promise } from '../lib/middlewares';
+import { thunk, promise } from '../../lib/middlewares';
 import createLogger from 'redux-logger';
 
 export default function configureStore(initialState) {

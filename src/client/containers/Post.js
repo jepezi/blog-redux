@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../components/Header';
 import { connect } from 'react-redux';
-import fetchData from '../lib/fetchData';
+import fetchData from '../../lib/fetchData';
 import { getPosts } from '../redux/modules/posts';
 
 class Post extends Component {
