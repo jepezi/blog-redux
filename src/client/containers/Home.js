@@ -7,6 +7,8 @@ import { getPosts } from '../redux/modules/posts';
 
 import fetchData from '../../lib/fetchData';
 
+import s from './Home.module.css';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +24,15 @@ class Home extends Component {
   }
 
   renderPosts() {
-    if (! this.props.posts.length) {
-      return <div>Loading...</div>
+    if (this.props.error) {
+      return <div>{this.props.error.message}</div>;
     }
 
-    return this.props.posts.slice(0, 4).map(post => {
+    if (this.props.isLoadingPosts) {
+      return <div>Loading...</div>;
+    }
+
+    return this.props.posts.map(post => {
       return (
         <div key={post.id}>
           <div className="post-preview">
@@ -53,7 +59,7 @@ class Home extends Component {
   render() {
     return <div>
       <Header bgStyle={{backgroundImage: "url('/img/home-bg.jpg')"}}>
-        <h1>Clean Blog</h1>
+        <h1 className={s.blogname}>Clean Blog</h1>
         <hr className="small" />
         <span className="subheading">A Clean Blog Theme by Start Bootstrap</span>
         <button onClick={this.toggle} className="btn btn-primary">Toggle</button>
@@ -79,7 +85,9 @@ class Home extends Component {
 function mapState(state) {
   return {
     counter: state.counter,
-    posts: state.posts.ids.map(id => state.entities.posts[id])
+    posts: state.posts.ids.map(id => state.entities.posts[id]).slice(0, 4),
+    error: state.error,
+    isLoadingPosts: state.posts.isLoading,
   }
 }
 

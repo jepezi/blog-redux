@@ -28,11 +28,11 @@ var jsonloader = { test: /\.json$/, loader: 'json-loader' };
 module.exports = {
   entry: {
     main: [ // (1)
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       path.join(APPPATH, 'src/client/main.js')
     ],
     admin: [
-      'webpack-hot-middleware/client',
+      'webpack-hot-middleware/client?path=http://localhost:3001/__webpack_hmr',
       path.join(APPPATH, 'src/admin/main.js')
     ]
   },
@@ -40,7 +40,7 @@ module.exports = {
     path: path.join(APPPATH, 'public', 'dist'),
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    publicPath: '/dist/' // (2)
+    publicPath: 'http://localhost:3001/dist/',
   },
   module: {
     loaders: [jsloader, jsonloader].concat(cssloaders)
