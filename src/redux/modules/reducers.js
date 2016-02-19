@@ -19,7 +19,8 @@ function counter(state = 0, action) {
 const reducers = (state = {}, action) => {
   return {
     greeting: greeting(state.greeting, action),
-    counter: counter(state.counter, action)
+    counter: counter(state.counter, action),
+    posts: posts(state.posts, action)
   }
 }
 

@@ -7,7 +7,7 @@ var jsloader = {
   exclude: /node_modules/,
   loader: 'babel',
   query: {
-    presets: ['es2015', 'react'],
+    presets: ['es2015', 'react', 'stage-2'],
     plugins: ['add-module-exports'],
     env: { // (3)
       development: {

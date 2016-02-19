@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
+import { getPosts } from '../redux/modules/posts';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -12,11 +14,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    $.get('http://jsonplaceholder.typicode.com/posts', res => {
-      this.setState({
-        data: res.slice(0, 4)
-      });
-    })
+    this.props.dispatch(getPosts())
   }
 
   toggle() {
@@ -26,11 +24,11 @@ class Home extends Component {
   }
 
   renderPosts() {
-    if (! this.state.data) {
+    if (! this.props.posts.length) {
       return <div>Loading...</div>
     }
 
-    return this.state.data.map(post => {
+    return this.props.posts.slice(0, 4).map(post => {
       return (
         <div key={post.id}>
           <div className="post-preview">
@@ -82,7 +80,8 @@ class Home extends Component {
 
 function mapState(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
+    posts: state.posts
   }
 }
 
