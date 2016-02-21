@@ -1,5 +1,14 @@
 # Setup `webpack` และ `babel-loader`
 
+เป้าหมายของเราคือการใช้ webpack รวมโมดูล source file ทั้งหมดให้เป็น 1 ไฟล์แล้วโหลดใน html ด้วย script tag โดยสอน webpack ว่าก่อนจะรวมโมดูลเข้าด้วยกัน ให้ใช้ babel แปลงไฟล์ให้เป็น ES5 ให้เราก่อน
+
+1. Install packages
+2. เขียน webpack config
+3. สร้างไฟล์ entry (`src/main.js`)
+4. script tag
+5. npm script
+6. run
+
 ## 1. Install packages
 
 ```
